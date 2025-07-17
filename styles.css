@@ -6,7 +6,10 @@ body {
 #inputFields {
   margin-bottom: 10px;
   display: grid;
-  grid-template-columns: 1fr 5ch 5ch;
+  grid-template-columns: 20ch 5ch 7ch;
+}
+#inputFields input {
+  padding: 0.5ch;
 }
 button {
   margin-top: 10px;
