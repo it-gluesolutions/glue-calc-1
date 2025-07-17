@@ -9,8 +9,13 @@ body {
   grid-template-columns: 20ch 5ch 7ch;
 }
 #inputFields input {
-  padding: 0.5ch;
+  padding: 0.2ch;
 }
+
+#inputFields span {
+  padding-left: 1ch;
+}
+
 #inputFields .hid, #inputFields .hid+*, #inputFields .hid+*+* {
   display: none;
 }
