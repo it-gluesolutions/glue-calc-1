@@ -1,0 +1,55 @@
+:root {
+  --primary: #0d6efd;
+  --radius: 0.5rem;
+  --gap: 1rem;
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: var(--gap);
+  max-width: 600px;
+  margin-inline: auto;
+  line-height: 1.4;
+}
+
+header, footer {
+  text-align: center;
+  margin-block: var(--gap) calc(var(--gap) * 2);
+}
+
+.calc-panel, .results-panel {
+  padding: var(--gap);
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  margin-block-end: var(--gap);
+}
+
+.calc-panel label {
+  display: block;
+  margin-block-end: 0.5rem;
+}
+
+#inputFields > div {
+  margin-block-end: 0.5rem;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1rem;
+}
+
+button[hidden] { display: none !important; }
+
+.debug {
+  background: rgba(0,0,0,.1);
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
