@@ -7,8 +7,8 @@ const STATIC_ASSETS = [
   "./calc.js",
   "./manifest.webmanifest"
   // Add icons here if you want them cached offline:
-  // "./icons/icon-192.png",
-  // "./icons/icon-512.png"
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
 ];
 
 self.addEventListener("install", e => {
