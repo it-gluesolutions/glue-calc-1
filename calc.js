@@ -11,7 +11,7 @@ export function get_glue_mass(p1, p2, p3, p4, h1, h2, h3) {
     h3: δεν χρησιμοπ.
   */
   const v = p1 * 60; // m/hr
-  const cnt = v / (p4 + p1) * 1000;
+  const cnt = v / (p4 + p2) * 1000;
   const area1 = (p2 * p3) / 1000000;
   const glue_area1 = area1 * h2;
   
