@@ -11,6 +11,9 @@ body {
 #inputFields input {
   padding: 0.5ch;
 }
+#inputFields .hid, #inputFields .hid+*. #inputFields .hid+*+*{
+  display: none;
+}
 button {
   margin-top: 10px;
   padding: 8px 12px;
