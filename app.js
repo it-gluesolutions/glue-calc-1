@@ -1,18 +1,82 @@
 import { get_glue_mass } from "./calc.js";
 
-document.getElementById("runCalc").addEventListener("click", () => {
-  const p1 = Number(document.getElementById("input-p1").value);
-  const p2 = Number(document.getElementById("input-p2").value);
-  const p3 = Number(document.getElementById("input-p3").value);
-  const p4 = Number(document.getElementById("input-p4").value);
-  const h1 = Number(document.getElementById("input-h1").value);
-  const h2 = Number(document.getElementById("input-h2").value);
-  const h3 = Number(document.getElementById("input-h3").value);
+// Local persistence key (bump version if schema changes)
+const STORAGE_KEY = "gluecalc-params-v1";
 
+// Utility: safe numeric parse; treat blank/invalid as 0
+function toNum(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function readParamsFromDOM() {
+  return {
+    p1: toNum(document.getElementById("input-p1").value),
+    p2: toNum(document.getElementById("input-p2").value),
+    p3: toNum(document.getElementById("input-p3").value),
+    p4: toNum(document.getElementById("input-p4").value),
+    h1: toNum(document.getElementById("input-h1").value),
+    h2: toNum(document.getElementById("input-h2").value),
+    h3: toNum(document.getElementById("input-h3").value)
+  };
+}
+
+function writeParamsToDOM(params) {
+  if (params.p1 !== undefined) document.getElementById("input-p1").value = params.p1;
+  if (params.p2 !== undefined) document.getElementById("input-p2").value = params.p2;
+  if (params.p3 !== undefined) document.getElementById("input-p3").value = params.p3;
+  if (params.p4 !== undefined) document.getElementById("input-p4").value = params.p4;
+  if (params.h1 !== undefined) document.getElementById("input-h1").value = params.h1;
+  if (params.h2 !== undefined) document.getElementById("input-h2").value = params.h2;
+  if (params.h3 !== undefined) document.getElementById("input-h3").value = params.h3;
+}
+
+function loadSavedParams() {
   try {
-    const result = get_glue_mass(p1, p2, p3, p4, h1, h2, h3);
-    document.getElementById("resultOutput").textContent = result;
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return; // nothing saved yet
+    const data = JSON.parse(raw);
+    if (typeof data !== "object" || data === null) return;
+    writeParamsToDOM(data);
+  } catch (err) {
+    console.warn("Failed to load saved params", err);
+  }
+}
+
+function saveParams(params) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(params));
+  } catch (err) {
+    console.warn("Failed to save params", err);
+  }
+}
+
+function doCalculation() {
+  const { p1, p2, p3, p4, h1, h2, h3 } = readParamsFromDOM();
+
+  let result;
+  try {
+    result = get_glue_mass(p1, p2, p3, p4, h1, h2, h3);
   } catch (err) {
     document.getElementById("resultOutput").textContent = "Error: " + err.message;
+    return;
+  }
+
+  document.getElementById("resultOutput").textContent = result;
+
+  // Persist the values used for this calculation
+  saveParams({ p1, p2, p3, p4, h1, h2, h3 });
+}
+
+// Wire up UI
+window.addEventListener("DOMContentLoaded", () => {
+  loadSavedParams();
+  document.getElementById("runCalc").addEventListener("click", doCalculation);
+
+  // Optional: register service worker if supported
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js").catch(err => {
+      console.warn("SW registration failed", err);
+    });
   }
 });
