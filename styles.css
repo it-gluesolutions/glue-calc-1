@@ -5,6 +5,8 @@ body {
 }
 #inputFields div {
   margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 5ch 5ch;
 }
 button {
   margin-top: 10px;
