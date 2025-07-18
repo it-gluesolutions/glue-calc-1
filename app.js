@@ -80,3 +80,28 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Track deferred prompt event
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault(); // Prevent Chrome from showing its default mini-infobar
+  deferredPrompt = e;
+  const installBtn = document.getElementById('installBtn');
+  if (installBtn) installBtn.style.display = 'inline-block';
+});
+
+// Handle click on custom install button
+const installBtn = document.createElement('button');
+installBtn.id = 'installBtn';
+installBtn.textContent = 'Install App';
+installBtn.style.display = 'none';
+document.body.appendChild(installBtn);
+
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log('User response to the install prompt:', outcome);
+  deferredPrompt = null;
+  installBtn.style.display = 'none';
+});
