@@ -62,7 +62,7 @@ function doCalculation() {
     return;
   }
 
-  document.getElementById("resultOutput").textContent = result;
+  document.getElementById("resultOutput").textContent = result.mass;
 
   // Persist the values used for this calculation
   saveParams({ p1, p2, p3, p4, h1, h2, h3 });
