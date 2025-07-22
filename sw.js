@@ -5,7 +5,7 @@ const STATIC_ASSETS = [
   "./styles.css",
   "./app.js",
   "./calc.js",
-  "./manifest.webmanifest"
+  "./manifest.webmanifest",
   // Add icons here if you want them cached offline:
   "./icons/icon-192.png",
   "./icons/icon-512.png"
