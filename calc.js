@@ -15,5 +15,5 @@ export function get_glue_mass(p1, p2, p3, p4, h1, h2, h3) {
   const area1 = (p2 * p3) / 1000000;
   const glue_area1 = area1 * h2;
   
-  return Math.round(glue_area1 * cnt);
+  return {mass:Math.round(glue_area1 * cnt), area: (area1 * cnt).toFixed(2)};
 }
