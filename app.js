@@ -63,6 +63,7 @@ function doCalculation() {
   }
 
   document.getElementById("resultOutput").textContent = result.mass;
+  document.getElementById("resultArea").textContent = result.area;
 
   // Persist the values used for this calculation
   saveParams({ p1, p2, p3, p4, h1, h2, h3 });
