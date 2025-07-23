@@ -25,18 +25,33 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Cache-first fetch (offline support)
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // Update cache with latest version
-        const responseClone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
-        return response;
-      })
-      .catch(() => {
-        // Offline fallback to cache
-        return caches.match(event.request);
-      })
+    caches.match(event.request).then((cached) => {
+      return cached || fetch(event.request);
+    })
   );
 });
+
+// Listen for 'updateCache' message from app.js
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'UPDATE_CACHE') {
+    self.skipWaiting();
+    updateStaticAssets();
+  }
+});
+
+function updateStaticAssets() {
+  fetchAndCache(STATIC_ASSETS);
+}
+
+function fetchAndCache(urls) {
+  caches.open(CACHE_NAME).then((cache) => {
+    urls.forEach((url) => {
+      fetch(url).then((response) => {
+        if (response.ok) cache.put(url, response.clone());
+      }).catch(() => console.warn('Failed to fetch', url));
+    });
+  });
+}
