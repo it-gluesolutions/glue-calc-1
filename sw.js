@@ -46,7 +46,10 @@ self.addEventListener('message', (event) => {
 function updateStaticAssets() {
   fetchAndCache(STATIC_ASSETS);
 }
-
+function postMessage(msg){
+   const client = await self.clients.get(event.clientId);   
+   client.postMessage(msg);
+}
 function fetchAndCache(urls) {
   caches.open(CACHE_NAME).then((cache) => {
     urls.forEach((url) => {
