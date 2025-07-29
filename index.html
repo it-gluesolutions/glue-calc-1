@@ -35,7 +35,8 @@
       </select>
       <br>
       <button onclick="accept_select()">OK</button>
-      <button onclic="closeSelector()">Άκυρο</button>
+      <button onclick="closeSelector()">Άκυρο</button>
+      <input type="hidden" name="ctl">
     </dialog>
   </div>
 
@@ -63,7 +64,15 @@
       const selector = document.getElementById('datalist_selector');
       var select = selector.firstElementChild;
       select.innerHTML = document.getElementById(datalist).innerHTML;
+      selector.lastElementChild.value = ctl;
       selector.showModal();
+    }
+    function accept_select(){
+      const selector = document.getElementById('datalist_selector');
+      const select = selector.firstElementChild;
+      var ctl = document.getElementById(selector.lastElementChild.value);
+      ctl.value = select.value;
+      selector.close();
     }
   </script>
 </body>
