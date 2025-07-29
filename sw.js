@@ -52,7 +52,8 @@ function fetchAndCache(urls) {
     urls.forEach((url) => {
       fetch(url).then((response) => {
         if (response.ok) cache.put(url, response.clone());
-      }).catch(() => console.warn('Failed to fetch', url));
+        alert('OK ', url));
+      }).catch(() => alert('Failed to fetch ' + url));
     });
   });
 }
