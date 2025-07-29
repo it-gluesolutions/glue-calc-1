@@ -16,7 +16,7 @@ function readParamsFromDOM() {
     p1: toNum(document.getElementById("input-p1").value),
     p2: toNum(document.getElementById("input-p2").value),
     p3: toNum(document.getElementById("input-p3").value),
-    p4: toNum(document.getElementBconst CACHE_NAME = "gluecalc-cache-v1";yId("input-p4").value),
+    p4: toNum(document.getElementById("input-p4").value),
     h1: toNum(document.getElementById("input-h1").value),
     h2: toNum(document.getElementById("input-h2").value),
     h3: toNum(document.getElementById("input-h3").value)
