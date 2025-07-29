@@ -73,7 +73,8 @@ function doCalculation() {
 
 function update_datalists(json){
   console.log(json);
-  alert(1);
+  //alert(1);
+  alert(JSON.stringify(json));
 }
 
 function load_datalists(){
