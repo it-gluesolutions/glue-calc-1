@@ -69,11 +69,15 @@ function doCalculation() {
   saveParams({ p1, p2, p3, p4, h1, h2, h3 });
 }
 
+function load_datalists(){
+  //const dl = 
+}
+
 // Wire up UI
 window.addEventListener("DOMContentLoaded", () => {
   loadSavedParams();
   document.getElementById("runCalc").addEventListener("click", doCalculation);
-
+  load_datalists();
   // Optional: register service worker if supported
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch(err => {
