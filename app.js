@@ -78,7 +78,7 @@ function update_datalists(json){
 }
 
 function load_datalists(){
-  caches.open(CACHE_NAME).then((cache)=>cache.match('./datalists.js')).then((res)=>res.json).
+  caches.open(CACHE_NAME).then((cache)=>cache.match('./datalists.js')).then((res)=>res.json()).
     then((json)=>update_datalists(json));
 }
 
