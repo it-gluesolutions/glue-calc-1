@@ -10,6 +10,7 @@ body {
 }
 #inputFields input {
   padding: 0.2ch;
+  width: 6ch;
 }
 
 #inputFields span {
