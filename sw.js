@@ -47,8 +47,7 @@ function updateStaticAssets() {
   fetchAndCache(STATIC_ASSETS);
 }
 function postMessage(msg){
-   const client = await self.clients.get(event.clientId);   
-   client.postMessage(msg);
+   self.clients.get(event.clientId).then((client)=>client.postMessage(msg));
 }
 function fetchAndCache(urls) {
   caches.open(CACHE_NAME).then((cache) => {
