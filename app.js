@@ -3,6 +3,8 @@ import { get_glue_mass } from "./calc.js";
 // Local persistence key (bump version if schema changes)
 const STORAGE_KEY = "gluecalc-params-v1";
 
+const CACHE_NAME = "gluecalc-cache-v1";
+
 // Utility: safe numeric parse; treat blank/invalid as 0
 function toNum(v) {
   const n = Number(v);
@@ -14,7 +16,7 @@ function readParamsFromDOM() {
     p1: toNum(document.getElementById("input-p1").value),
     p2: toNum(document.getElementById("input-p2").value),
     p3: toNum(document.getElementById("input-p3").value),
-    p4: toNum(document.getElementById("input-p4").value),
+    p4: toNum(document.getElementBconst CACHE_NAME = "gluecalc-cache-v1";yId("input-p4").value),
     h1: toNum(document.getElementById("input-h1").value),
     h2: toNum(document.getElementById("input-h2").value),
     h3: toNum(document.getElementById("input-h3").value)
@@ -69,8 +71,14 @@ function doCalculation() {
   saveParams({ p1, p2, p3, p4, h1, h2, h3 });
 }
 
+function update_datalists(json){
+  console.log(json);
+  alert(1);
+}
+
 function load_datalists(){
-  //const dl = 
+  caches.open(CACHE_NAME).then((cache)=>cache.match('./datalists.js')).then((res)=>res.json).
+    then((json)=>update_datalists(json));
 }
 
 // Wire up UI
