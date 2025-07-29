@@ -39,23 +39,23 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'UPDATE_CACHE') {
     self.skipWaiting();
-    updateStaticAssets();
+    updateStaticAssets(event.source);
   }
 });
 
-function updateStaticAssets() {
-  fetchAndCache(STATIC_ASSETS);
+function updateStaticAssets(client) {
+  fetchAndCache(STATIC_ASSETS, client);
 }
-function postMessage(msg){
-   self.clients.get(event.clientId).then((client)=>client.postMessage(msg));
+function postMessage(client, msg){
+   client.postMessage(msg);
 }
-function fetchAndCache(urls) {
+function fetchAndCache(urls, client) {
   caches.open(CACHE_NAME).then((cache) => {
     urls.forEach((url) => {
       fetch(url).then((response) => {
         if (response.ok) cache.put(url, response.clone());
-        postMessage({ type: 'ALERT', info: 'OK ' + url});
-      }).catch(() => postMessage({ type: 'ALERT', info: 'FAIL ' + url}));
+        postMessage(client, { type: 'ALERT', info: 'OK ' + url});
+      }).catch(() => postMessage(client, { type: 'ALERT', info: 'FAIL ' + url}));
     });
   });
 }
