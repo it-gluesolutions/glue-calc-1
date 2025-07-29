@@ -74,7 +74,20 @@ function doCalculation() {
 function update_datalists(json){
   console.log(json);
   //alert(1);
-  alert(JSON.stringify(json));
+  //alert(JSON.stringify(json));
+  const datalist_map = [
+    "surface_density"
+  ];
+  for(var l of datalist_map){
+    if (json[l] === undefined) continue;
+    var dl = document.getElementById(l);
+    var html = '';
+    var list = json[l];
+    for(var i in list){
+      html += '<option value="'+list[i]+'">'+i+'</option>';
+    }
+    dl.innerHTML = html;
+  }
 }
 
 function load_datalists(){
