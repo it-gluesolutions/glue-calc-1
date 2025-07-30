@@ -149,6 +149,7 @@ navigator.serviceWorker.addEventListener('message', (event) => {
     // alert(event.data.info);
     if (event.data.info){
       cache_update.info = event.data.info;
+      alert('Έλεγχος για νεώτερες εκδόσεις');
     } else {
       if ('ERROR' == event.data.result)
         cache_update.urls.error.push(event.data.url);
