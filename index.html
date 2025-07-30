@@ -52,7 +52,7 @@
   <script>
     function update_files(event){
       if (navigator.serviceWorker.controller) {
-        alert('Έλεγχος για νεώτερες εκδόσεις');
+        //alert('Έλεγχος για νεώτερες εκδόσεις');
         navigator.serviceWorker.controller.postMessage({ type: 'UPDATE_CACHE' });
         //alert('Update check triggered. Reload page if new content is available.');
       }
