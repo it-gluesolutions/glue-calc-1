@@ -133,7 +133,7 @@ installBtn.addEventListener('click', async () => {
   installBtn.style.display = 'none';
 });
 
-window.addEventListener('message', (event) => {
+navigator.serviceWorker.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'ALERT') {
     alert(event.data.info);
   }
