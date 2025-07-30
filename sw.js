@@ -50,12 +50,17 @@ function postMessage(client, msg){
    client.postMessage(msg);
 }
 function fetchAndCache(urls, client) {
+  postMessage(client, { type: 'FILES_FETCHING', info: urls.length});
   caches.open(CACHE_NAME).then((cache) => {
     urls.forEach((url) => {
       fetch(url).then((response) => {
         if (response.ok) cache.put(url, response.clone());
-        postMessage(client, { type: 'ALERT', info: 'OK ' + url});
-      }).catch(() => postMessage(client, { type: 'ALERT', info: 'FAIL ' + url}));
+        //postMessage(client, { type: 'ALERT', info: 'OK ' + url});
+        postMessage(client, { type: 'FILES_FETCHING', result: 'OK, url: url});
+      }).catch(() => 
+            postMessage(client, { type: 'FILES_FETCHING', result: 'ERROR, url: url});
+            //postMessage(client, { type: 'ALERT', info: 'FAIL ' + url})
+          );
     });
   });
 }
