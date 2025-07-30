@@ -133,10 +133,33 @@ installBtn.addEventListener('click', async () => {
   installBtn.style.display = 'none';
 });
 
+var cache_update = {
+  info: 0,
+  urls: {
+    ok: [],
+    error: []
+  }
+};
+
 navigator.serviceWorker.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'ALERT') {
     alert(event.data.info);
   }
+  if (event.data && event.data.type === 'FILES_FETCHING') {
+    // alert(event.data.info);
+    if (event.data.info){
+      cache_update.info = event.data.info;
+    } else {
+      if ('ERROR' == cache_update.result)
+        cache_update.urls.error.push({});
+      else
+        cache_update.urls.ok.push({});
+      if (cache_update.info == cache_update.urls.ok.length + cache_update.urls.error.length){
+        alert(JSON.stringify(cache_update.urls));
+      }
+    }
+  }
+  
 });
 
 
