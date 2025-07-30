@@ -151,9 +151,9 @@ navigator.serviceWorker.addEventListener('message', (event) => {
       cache_update.info = event.data.info;
     } else {
       if ('ERROR' == cache_update.result)
-        cache_update.urls.error.push({});
+        cache_update.urls.error.push(cache_update.url);
       else
-        cache_update.urls.ok.push({});
+        cache_update.urls.ok.push(cache_update.url);
       if (cache_update.info == cache_update.urls.ok.length + cache_update.urls.error.length){
         alert(JSON.stringify(cache_update.urls));
       }
