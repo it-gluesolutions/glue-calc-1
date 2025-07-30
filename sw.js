@@ -58,7 +58,7 @@ function fetchAndCache(urls, client) {
         //postMessage(client, { type: 'ALERT', info: 'OK ' + url});
         postMessage(client, { type: 'FILES_FETCHING', result: 'OK', url: url});
       }).catch(() => 
-            postMessage(client, { type: 'FILES_FETCHING', result: 'ERROR', url: url});
+            postMessage(client, { type: 'FILES_FETCHING', result: 'ERROR', url: url})
             //postMessage(client, { type: 'ALERT', info: 'FAIL ' + url})
           );
     });
