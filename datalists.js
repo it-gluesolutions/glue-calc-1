@@ -1,7 +1,8 @@
 {
   "surface_density": {
-    "glue1: 140 gr/m^2": 140,
-    "glue2: 220 gr/m^2": 220,
-    "glue3: 170 gr/m^2": 170
+    "Feelt PU (607.40): 140,
+    "Unfeelt PU (608.00)": 100,
+    "Feelt EVA (280.50)": 230,
+    "Unfeelt EVA (280.30): 200
   }
 }
